@@ -7,6 +7,6 @@ RUN apt-get update
 RUN apt-get install -y cron
 
 # Add the cron job
-RUN crontab -l | { cat; echo "0 5 * * * bash "; } | crontab -
+RUN crontab -l | { cat; echo "0 5 * * * python main.py -lon 11.5755 -lat 48.1374 -o out"; } | crontab -
 
 CMD cron ; python -m http.server --directory out
