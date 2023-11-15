@@ -7,6 +7,8 @@ from datetime import date
 import shutil # save img locally
 from time import time
 import argparse
+import os
+
 parser = argparse.ArgumentParser()
 parser.add_argument("-lon", help="longitude for weather forecast", type=float, required=True)
 parser.add_argument("-lat", help="latitude for weather forecast", type=float, required=True)
@@ -91,26 +93,18 @@ def save_prompt(prompt, file_name, out_dir):
         f.write(prompt)
 
 
-import os
-if not os.path.exists(OUTDIR):
-   os.makedirs(OUTDIR)
-
-weather = get_weather(LAT, LON, OPENWEATHER_API)
-
-
-
-print(weather)
-gpt_prompt = generate_gpt4_prompt(weather, STYLE)
-print(gpt_prompt)
-dalle_prompt = generate_dalle_prompt(gpt_prompt)
-print(dalle_prompt)
-
-image_url = generate_image(dalle_prompt)
-print(image_url)
-now = time()
-save_image(image_url, f'{date.today()}-{now}.png', OUTDIR)
-save_prompt(dalle_prompt, f'DALL-E3.{date.today()}-{now}.txt', OUTDIR)
-save_prompt(gpt_prompt, f'GPT4.{date.today()}-{now}.txt', OUTDIR)
-
-#-lon 11.5755 -lat 48.1374
-
+if __name__ == "__main__":
+    if not os.path.exists(OUTDIR):
+        os.makedirs(OUTDIR)
+    weather = get_weather(LAT, LON, OPENWEATHER_API)
+    print(f'weather for {LAT} lat, {LON} lon recieved ...')
+    gpt_prompt = generate_gpt4_prompt(weather, STYLE)
+    print(f'GPT4 prompt generated ...')
+    dalle_prompt = generate_dalle_prompt(gpt_prompt)
+    print(f'DALL-E3 prompt generated ...')
+    image_url = generate_image(dalle_prompt)
+    now = time()
+    save_image(image_url, f'{date.today()}-{now}.png', OUTDIR)
+    save_prompt(dalle_prompt, f'DALL-E3.{date.today()}-{now}.txt', OUTDIR)
+    save_prompt(gpt_prompt, f'GPT4.{date.today()}-{now}.txt', OUTDIR)
+    print('done!')
