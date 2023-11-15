@@ -44,7 +44,9 @@ def generate_gpt4_prompt(data, style):
     Relative Humidity: {data['humidity']['afternoon']} %
     Clouds: {data['cloud_cover']['afternoon']} %
     Date: {date.today()}
-    It is strictly important that no text is shown on the image
+    Make sure the coordinates are translated into a country and/or an area in a country. Be es precise as possible.
+    The prompt should be as detailed as possible to convey the style and artistic represenation and mood of the weather.
+    It is strictly important that no text is shown on the image. State this clearly in the prompt!
     """
     return text
 
@@ -105,10 +107,10 @@ print(dalle_prompt)
 
 image_url = generate_image(dalle_prompt)
 print(image_url)
-
-save_image(image_url, f'{date.today()}-{time()}.png', OUTDIR)
-save_prompt(dalle_prompt, f'DALL-E3.{date.today()}-{time()}.txt', OUTDIR)
-save_prompt(gpt_prompt, f'GPT4.{date.today()}-{time()}.txt', OUTDIR)
+now = time()
+save_image(image_url, f'{date.today()}-{now}.png', OUTDIR)
+save_prompt(dalle_prompt, f'DALL-E3.{date.today()}-{now}.txt', OUTDIR)
+save_prompt(gpt_prompt, f'GPT4.{date.today()}-{now}.txt', OUTDIR)
 
 #-lon 11.5755 -lat 48.1374
 
