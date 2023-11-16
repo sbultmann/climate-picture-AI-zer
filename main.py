@@ -105,6 +105,7 @@ if __name__ == "__main__":
     image_url = generate_image(dalle_prompt)
     now = time()
     save_image(image_url, f'{date.today()}-{now}.png', OUTDIR)
+    save_image(image_url, f'latest.png', OUTDIR)
     save_prompt(dalle_prompt, f'DALL-E3.{date.today()}-{now}.txt', OUTDIR)
     save_prompt(gpt_prompt, f'GPT4.{date.today()}-{now}.txt', OUTDIR)
     print('done!')
