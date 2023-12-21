@@ -38,7 +38,7 @@ def get_weather(lat, lon, OPENWEATHER_API):
 
 def generate_gpt4_prompt(data, style):
     text =    f"""
-    Generate a creative prompt in the style of {style} based on the weatherforecast with the following information:
+    Generate a creative prompt for DallE-3 (image generating AI) based on the weatherforecast with the following information:
     Coordinates: {data['lon']} longitude; {data['lat']}
     Precipitation: {data['precipitation']['total']} mm
     Temperature: {data['temperature']['max']} Celsius
@@ -47,7 +47,9 @@ def generate_gpt4_prompt(data, style):
     Clouds: {data['cloud_cover']['afternoon']} %
     Date: {date.today()}
     Make sure the coordinates are translated into a country and/or an area in a country. Be es precise as possible.
-    The prompt should be as detailed as possible to convey the style and artistic represenation and mood of the weather.
+    The prompt should be as detailed as possible to convey the style and artistic represenation and mood of the weather and season.
+    Make sure that the weather is accuratly repesented. For example very little Precipitation does not mean that there will be any rain. 
+    Very few clouds could point to a sunny day and so on.
     It is strictly important that no text is shown on the image. State this clearly in the prompt!
     """
     return text
