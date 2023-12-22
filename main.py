@@ -1,3 +1,4 @@
+#!/home/bastelbot/anaconda3/bin/python
 from openai import OpenAI
 import dotenv
 import os
