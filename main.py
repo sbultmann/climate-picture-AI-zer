@@ -50,7 +50,8 @@ def generate_gpt4_prompt(data, style):
     Make sure the coordinates are translated into a country and/or an area in a country. Be es precise as possible.
     The prompt should be as detailed as possible to convey the style and artistic represenation and mood of the weather and season.
     Make sure that the weather is accuratly repesented. For example very little Precipitation does not mean that there will be any rain. 
-    Very few clouds could point to a sunny day and so on.
+    Very few clouds could point to a sunny day and so on. If the coordinates fall within a city, do not depict the city but a hallmark landscape close to it.
+    E.g. if it is the german city Munich, include mountains and maybe lakes.
     It is strictly important that no text is shown on the image. State this clearly in the prompt!
     """
     return text
